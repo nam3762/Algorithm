@@ -1,9 +1,9 @@
 # Algorithm
 ### Lauguage
-#### Java (Java 11, Java 8)
-#### JavaScript (Node.js)
+- Java (Java 11, Java 8)
+- JavaScript (Node.js)
 
-
+---
 ### Platform
-#### Baekjoon
-#### SW Experts Academy
+- Baekjoon
+- SW Experts Academy
