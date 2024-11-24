@@ -5,5 +5,5 @@
 
 ---
 ### Platform
-- Baekjoon
+- Baekjoon (nam3762)
 - SW Experts Academy
