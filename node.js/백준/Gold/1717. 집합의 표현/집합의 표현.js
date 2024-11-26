@@ -29,7 +29,6 @@ class UnionFind {
                 this.rank[root1]++;
             }
         }
-
     }
 
     isConnected(a, b) {
@@ -42,11 +41,13 @@ const fs = require('fs');
 const input = fs.readFileSync(0, 'utf8').toString().trim().split('\n');
 const [n, m] = input[0].split(' ').map(Number);
 const unionfind = new UnionFind(n + 1);
+const result = []
 for (let i = 1; i <= m; i++) {
     const [operator, a, b] = input[i].trim().split(' ').map(Number);
     if (operator === 0) {
         unionfind.union(a, b);
     } else {
-        console.log(unionfind.isConnected(a, b) ? "YES" : "NO");
+        result.push(unionfind.isConnected(a, b) ? "YES" : "NO");
     }
 }
+console.log(result.join('\n'));
