@@ -1,0 +1,1 @@
+console.log((n => n > 81 ? 0 : [...Array(9)].some((_, i) => n % (i + 1) === 0 && n / (i + 1) >= 1 && n / (i + 1) <= 9) ? 1 : 0)(Number.parseInt(require('fs').readFileSync(0, 'utf8').trim())));
