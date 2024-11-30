@@ -4,17 +4,16 @@ const str1 = input[0].trim();
 const str2 = input[1].trim();
 const N = str1.length;
 const M = str2.length;
-let DP = Array.from({length: N + 1}, () => Array(M + 1).fill(0));
+let DP = Array.from({length: 2}, () => Array(Math.max(N, M) + 1).fill(0));
 let max = 0;
-// DP[i][j] = str1 의 처음 i 글자와 str2 의 처음 j 글자 사이의 최장 공통 부분 수열 길이
 for (let i = 1; i <= N; i++) {
     for (let j = 1; j <= M; j++) {
         if (str1.charAt(i - 1) === str2.charAt(j - 1)) {
-            DP[i][j] = DP[i - 1][j - 1] + 1;
+            DP[i % 2][j] = DP[(i - 1) % 2][j - 1] + 1;
         } else {
-            DP[i][j] = Math.max(DP[i - 1][j], DP[i][j - 1]);
+            DP[i % 2][j] = Math.max(DP[(i - 1) % 2][j], DP[i % 2][j - 1]);
         }
-        max = Math.max(max, DP[i][j]);
+        max = Math.max(max, DP[i % 2][j]);
     }
 }
 console.log(max);
