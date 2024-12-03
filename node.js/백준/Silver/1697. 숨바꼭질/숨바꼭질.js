@@ -21,7 +21,7 @@ function BFS(start) {
             set.add(currentNumber);
             queue.push([currentNumber + 1, currentDepth + 1]);
             queue.push([currentNumber - 1, currentDepth + 1]);
-            if (currentNumber * 2 <= 200000) {
+            if (currentNumber * 2 <= 100000) {
                 queue.push([currentNumber * 2, currentDepth + 1]);
             }
         }
