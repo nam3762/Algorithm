@@ -1,54 +1,53 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashSet;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        HashSet<Integer> set = new HashSet<>();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder resultSb = new StringBuilder();
+        int bitmask = 0;
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            String str = st.nextToken();
-            int number = 0;
+            String command = st.nextToken();
+            int num = 0;
             if (st.hasMoreTokens()) {
-                number = Integer.parseInt(st.nextToken());
+                num = Integer.parseInt(st.nextToken()) - 1;
             }
-            switch (str) {
-                case "add":
-                    set.add(number);
-                    break;
-                case "remove":
-                    set.remove(number);
-                    break;
-                case "check":
-                    if (set.contains(number)) {
-                        sb.append(1);
-                    } else {
-                        sb.append(0);
-                    }
-                    sb.append("\n");
-                    break;
-                case "toggle":
-                    if (set.contains(number)) {
-                        set.remove(number);
-                    } else {
-                        set.add(number);
-                    }
-                    break;
-                case "all":
-                    for (int n = 1; n <= 20; n++) {
-                        set.add(n);
-                    }
-                    break;
-                default:
-                    set.clear();
-                    break;
+            if (command.equals("check")) {
+                boolean isSet = (bitmask & (1 << num)) != 0;
+                if (isSet) resultSb.append(1).append("\n");
+                else resultSb.append(0).append("\n");
             }
+            bitmask = exec(command, num, bitmask);
         }
-        System.out.print(sb);
+        System.out.println(resultSb);
+    }
+
+    public static int exec(String command, int num, int bitmask) {
+        switch (command) {
+            case "add":
+                bitmask |= (1 << num);
+                break;
+            case "remove":
+                bitmask &= ~(1 << num);
+                break;
+            case "toggle":
+                bitmask ^= (1 << num);
+                break;
+            case "all":
+                for (int i = 0; i < 20; i++) {
+                    bitmask |= (1 << i);
+                }
+                break;
+            case "empty":
+                for (int i = 0; i < 20; i++) {
+                    bitmask &= ~(1 << i);
+                }
+                break;
+            default:
+                break;
+        }
+        return bitmask;
     }
 }
